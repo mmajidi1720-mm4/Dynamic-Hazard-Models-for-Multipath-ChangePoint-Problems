@@ -1,19 +1,9 @@
-# =====================================================================
-# Optimized & Parallelized Code for "The Dynamic Hazard Changepoint Model"
-# Designed for Reproducibility in Peer Review
-# Speeding changes ONLY: fast row-cumsum (identical numerics) + live % progress
-# Statistical model / multi-start / optim / estimators UNCHANGED
-# =====================================================================
-
 library(stats)
 library(parallel)
 
-# Set to TRUE for a quick test run (R_sim = 50), or FALSE for the final paper results (R_sim = 300)
+# Set to TRUE for a quick test run (R_sim = 50), or FALSE for the final paper results (R_sim = 1000)
 FAST_MODE <- FALSE
 
-# ---------------------------------------------------------------------
-# Fast row-wise cumulative sum (pure base R, identical to apply+cumsum order)
-# This is the main speedup; results remain numerically the same.
 # ---------------------------------------------------------------------
 fast_row_cumsum <- function(x) {
   n <- nrow(x)
@@ -29,7 +19,7 @@ fast_row_cumsum <- function(x) {
 }
 
 # ---------------------------------------------------------------------
-# 1. Fully Vectorized Data Generating Process (DGP)  [identical logic]
+# 1. Fully Vectorized Data Generating Process (DGP)  
 # ---------------------------------------------------------------------
 generate_data <- function(n, m, beta0, psi0, mu0, sigma0, mu1, sigma1) {
   Z <- cbind(runif(n, -1, 1), rnorm(n, 0, 1))
@@ -110,7 +100,7 @@ neg_log_likelihood_constant <- function(theta, X, Z, m, mu0 = 0, sigma0 = 1, sig
 }
 
 # ---------------------------------------------------------------------
-# 4. Multi-Start Grid Search Optimization Functions  [UNCHANGED]
+# 4. Multi-Start Grid Search Optimization Functions  
 # ---------------------------------------------------------------------
 fit_model_multistart <- function(X, Z, m, mu0, sigma0, sigma1, model_type = c("dynamic", "constant"), fast = FALSE) {
   model_type <- match.arg(model_type)
@@ -187,7 +177,7 @@ fit_model_multistart <- function(X, Z, m, mu0, sigma0, sigma1, model_type = c("d
 }
 
 # ---------------------------------------------------------------------
-# 5. Posterior Inference and Vectorized Fallback CUSUM  [identical]
+# 5. Posterior Inference and Vectorized Fallback CUSUM  
 # ---------------------------------------------------------------------
 estimate_tau <- function(theta, X, Z, m, mu0 = 0, sigma0 = 1, sigma1 = 1.5) {
   beta <- theta[1:2]
@@ -250,7 +240,7 @@ detect_pelt_single <- function(x) {
 }
 
 # ---------------------------------------------------------------------
-# 6. Monte Carlo Simulation Setup + live progress
+# 6. Monte Carlo Simulation Setup 
 # ---------------------------------------------------------------------
 set.seed(2026)
 R_sim <- if (FAST_MODE) 50 else 100
@@ -288,7 +278,7 @@ cat("Starting Parallel Monte Carlo Simulation with R =", R_sim,
 cat("Progress will be shown as percentage...\n")
 start_time <- Sys.time()
 
-# ----- Batch-wise parallel execution with live % progress (no extra packages) -----
+# ----- ------------------------------ -----
 results <- vector("list", R_sim)
 batch_size <- 20   # update progress every ~20 replications (adjust if desired)
 
@@ -358,7 +348,7 @@ end_time <- Sys.time()
 cat("Simulation completed in", round(difftime(end_time, start_time, units = "secs"), 1), "seconds.\n")
 
 # ---------------------------------------------------------------------
-# 8. Post-Processing and Formatting Tables  [UNCHANGED]
+# 8. Post-Processing and Formatting Tables  
 # ---------------------------------------------------------------------
 converged_dyn <- which(sapply(results, function(x) x$dyn_conv) == 1)
 converged_con <- which(sapply(results, function(x) x$con_conv) == 1)
