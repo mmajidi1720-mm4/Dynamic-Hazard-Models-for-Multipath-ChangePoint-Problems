@@ -10,7 +10,7 @@ library(parallel)
 # Set RUN_SIMULATION = TRUE only when you want to reproduce the Monte Carlo tables
 # (time-consuming when FAST_MODE = FALSE).
 RUN_PRACTICAL_EXAMPLE <- TRUE
-RUN_SIMULATION      <- False
+RUN_SIMULATION      <- FALSE
 
 # Set to TRUE for a quick test run (R_sim = 50), or FALSE for the final paper results (R_sim = 1000)
 FAST_MODE <- FALSE
