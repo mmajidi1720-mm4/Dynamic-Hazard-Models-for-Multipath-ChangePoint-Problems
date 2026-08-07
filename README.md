@@ -27,17 +27,17 @@ install.packages("changepoint")
 
 ### A. Practical Application to Your Own Data (Part I)
 If you wish to apply the DHCM to your own longitudinal dataset:
-1. Open `DHCM_Implementation_and_Simulation.R`.
+1. Open `Dynamic_Hazard_Changepoint_Model_R4.R`.
 2. Run the functions defined in **Part I**.
 3. Follow the "Minimal Self-Contained Example" provided at the end of Part I. It demonstrates how to structure your design matrix (`X_cov`), run `fit_dhcm()`, and extract individual changepoint estimates ($\hat{\tau}_i$) using `predict_changepoints()`.
 
 ### B. Reproducing Manuscript Simulations (Part II)
 To reproduce the exact simulation results reported in the paper:
-1.  **Download and Open**: Download `DHCM_Implementation_and_Simulation.R` and set your R working directory to its location.
+1.  **Download and Open**: Download `Dynamic_Hazard_Changepoint_Model_R4.R` and set your R working directory to its location.
 2.  **Choose the Simulation Mode**: In **Part II** of the script, look for the `FAST_MODE` toggle:
     *   **Fast Test Run**: To quickly verify the code runs without errors, set `FAST_MODE <- TRUE`. This runs a small number of replications (`R_sim = 50`) and completes in minutes.
     *   **Full Manuscript Replication**: To reproduce the full tables from the paper, set `FAST_MODE <- FALSE`. This runs 1,000 replications using parallel processing. *Note: This will take a significant amount of time depending on your CPU.*
 3.  **Execute**: Run the script using the following command in your console:
 ```R
-source('DHCM_Implementation_and_Simulation.R')
+source('Dynamic_Hazard_Changepoint_Model_R4.R')
 ```
