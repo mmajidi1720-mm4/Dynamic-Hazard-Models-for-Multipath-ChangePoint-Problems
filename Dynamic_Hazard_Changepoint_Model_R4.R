@@ -1,7 +1,7 @@
 # ==============================================================================
 # The Dynamic Hazard Changepoint Model (DHCM)
 # Unified Script: Practical Implementation & Monte Carlo Simulation
-# ==============================================================================
+# =============================================================================
 
 library(stats)
 library(parallel)
