@@ -29,7 +29,7 @@ install.packages("changepoint")
 If you wish to apply the DHCM to your own longitudinal dataset:
 1. Open `Dynamic_Hazard_Changepoint_Model_R4.R`.
 2. Run the functions defined in **Part I**.
-3. Follow the "Minimal Self-Contained Example" provided at the end of Part I. It demonstrates how to structure your design matrix (`X_cov`), run `fit_dhcm()`, and extract individual changepoint estimates ($\hat{\tau}_i$) using `predict_changepoints()`.
+3. Follow the "Minimal Self-Contained Example" provided at the end of Part I. It demonstrates how to structure your design matrix (`X_cov`), run `fit_dhcm()`, and extract individual change-point estimates ($\hat{\tau}_i$) using `predict_changepoints()`.
 
 ### B. Reproducing Manuscript Simulations (Part II)
 To reproduce the exact simulation results reported in the paper:
